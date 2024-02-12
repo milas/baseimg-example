@@ -1,0 +1,20 @@
+services:
+  base:
+    image: base-img
+    build:
+      context: .
+      dockerfile: ./base.dockerfile
+    deploy:
+      replicas: 0
+  a:
+    build:
+      context: .
+      dockerfile: ./a.dockerfile
+    depends_on: [base]
+    restart: on-failure
+  b:
+    build:
+      context: .
+      dockerfile: ./b.dockerfile
+    depends_on: [base]
+    restart: on-failure
